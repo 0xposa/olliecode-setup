@@ -40,6 +40,18 @@ source ~/.bashrc
 | `olliecode-update` | `git pull` + `bun install` (update) |
 | `olliecode-reset` | Hapus data olliEcode (`~/.ollie`) |
 
+Isi alias yang dibuat installer di `~/.bashrc`:
+
+```bash
+alias olliecode='export XDG_CONFIG_HOME="$HOME/.ollie/config"; export XDG_DATA_HOME="$HOME/.ollie/data"; export XDG_CACHE_HOME="$HOME/.ollie/cache"; export XDG_STATE_HOME="$HOME/.ollie/state"; cd "$HOME/olliecode"; bun run --cwd packages/cli src/index.ts'
+
+alias olliecode-web='export XDG_CONFIG_HOME="$HOME/.ollie/config"; export XDG_DATA_HOME="$HOME/.ollie/data"; export XDG_CACHE_HOME="$HOME/.ollie/cache"; export XDG_STATE_HOME="$HOME/.ollie/state"; cd "$HOME/olliecode"; bun dev serve --port 4096 & cd packages/app; bun dev -- --port 4444'
+
+alias olliecode-update='cd "$HOME/olliecode"; git pull; bun install'
+
+alias olliecode-reset='rm -rf "$HOME/.ollie"; echo "Data olliEcode direset"'
+```
+
 > Alias ini otomatis dibuat oleh installer di `~/.bashrc`. Data terisolasi, jadi **OpenCode asli tidak tersentuh**.
 
 ## One-liner install / uninstall
