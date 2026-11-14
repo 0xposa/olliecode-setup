@@ -1,27 +1,20 @@
 # olliEcode Setup
 
-One-line install & uninstall untuk **olliEcode** di proot-distro (Ubuntu/Debian).
+Installer **binary siap pakai** untuk **olliEcode** di proot-distro (Ubuntu/Debian) — **arm64 (aarch64)**. Tanpa build.
 
 ## Prasyarat
 
-- **Termux** (dari F-Droid/GitHub, bukan Play Store)
-- `proot-distro` terinstall dan distro **Ubuntu** (atau Debian) sudah ada:
+- **Termux** (F-Droid/GitHub, bukan Play Store)
+- `proot-distro` + distro **Ubuntu/Debian arm64**:
   ```bash
   pkg install proot-distro
   proot-distro install ubuntu
   ```
 
-## Install
-
-Masuk ke distro dulu:
+## Install (satu baris)
 
 ```bash
 proot-distro login ubuntu
-```
-
-Lalu paste satu baris:
-
-```bash
 curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/setup-ollie.sh | bash
 ```
 
@@ -29,37 +22,26 @@ curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/setup-o
 
 ```bash
 source ~/.bashrc
+olliecode
 ```
 
 ## Shortcut (alias command)
 
 | Perintah | Fungsi |
 |---|---|
-| `olliecode` | Buka CLI olliEcode (data terisolasi ke `~/.ollie`) |
-| `olliecode-web` | Jalanin web UI di `http://localhost:4444` |
-| `olliecode-update` | `git pull` + `bun install` (update) |
+| `olliecode` | Buka CLI olliEcode |
+| `olliecode-web` | Jalanin service di `http://localhost:4444` |
 | `olliecode-reset` | Hapus data olliEcode (`~/.ollie`) |
 
-Isi alias yang dibuat installer di `~/.bashrc`:
+Isi alias (ditulis installer ke `~/.bashrc`):
 
 ```bash
-alias olliecode='export XDG_CONFIG_HOME="$HOME/.ollie/config"; export XDG_DATA_HOME="$HOME/.ollie/data"; export XDG_CACHE_HOME="$HOME/.ollie/cache"; export XDG_STATE_HOME="$HOME/.ollie/state"; cd "$HOME/olliecode"; bun run --cwd packages/cli src/index.ts'
+alias olliecode='export XDG_CONFIG_HOME="$HOME/.ollie/config"; export XDG_DATA_HOME="$HOME/.ollie/data"; export XDG_CACHE_HOME="$HOME/.ollie/cache"; export XDG_STATE_HOME="$HOME/.ollie/state"; $HOME/.ollie/bin/opencode'
 
-alias olliecode-web='export XDG_CONFIG_HOME="$HOME/.ollie/config"; export XDG_DATA_HOME="$HOME/.ollie/data"; export XDG_CACHE_HOME="$HOME/.ollie/cache"; export XDG_STATE_HOME="$HOME/.ollie/state"; cd "$HOME/olliecode"; bun dev serve --port 4096 & cd packages/app; bun dev -- --port 4444'
-
-alias olliecode-update='cd "$HOME/olliecode"; git pull; bun install'
+alias olliecode-web='export XDG_CONFIG_HOME="$HOME/.ollie/config"; export XDG_DATA_HOME="$HOME/.ollie/data"; export XDG_CACHE_HOME="$HOME/.ollie/cache"; export XDG_STATE_HOME="$HOME/.ollie/state"; $HOME/.ollie/bin/opencode serve --port 4096'
 
 alias olliecode-reset='rm -rf "$HOME/.ollie"; echo "Data olliEcode direset"'
 ```
-
-> Alias ini otomatis dibuat oleh installer di `~/.bashrc`. Data terisolasi, jadi **OpenCode asli tidak tersentuh**.
-
-## One-liner install / uninstall
-
-| Perintah | Fungsi |
-|---|---|
-| `curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/setup-ollie.sh \| bash` | Install + bikin semua shortcut |
-| `curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/uninstall-ollie.sh \| bash` | Hapus semua jejak olliEcode |
 
 ## Uninstall
 
@@ -69,6 +51,6 @@ curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/uninsta
 
 ## Catatan
 
-- Data olliEcode disimpan terpisah di `~/.ollie` (bukan `~/.config/opencode`), jadi **OpenCode asli tidak tersentuh**.
-- **Bun** tidak ikut terhapus saat uninstall (dipakai app lain).
+- Data olliEcode terisolasi di `~/.ollie` — **OpenCode asli tidak tersentuh**.
+- Binary: `opencode-linux-arm64.gz` (di GitHub Releases).
 - Repo sumber: `https://gitlab.com/123-group5802346/olliecode`

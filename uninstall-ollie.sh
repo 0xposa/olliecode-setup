@@ -6,23 +6,17 @@ set -e
 # (OpenCode asli tidak tersentuh)
 # ============================================================
 
-echo "== 1/4 Hapus semua alias olliEcode =="
+echo "== 1/3 Hapus alias =="
 sed -i '/# ---- olliEcode shortcuts/,/alias olliecode-reset=/d' "$HOME/.bashrc" 2>/dev/null || true
 sed -i '/alias olliecode/d' "$HOME/.bashrc" 2>/dev/null || true
-echo "Alias dihapus dari .bashrc"
+echo "Alias dihapus"
 
-echo "== 2/4 Hapus folder repo =="
-rm -rf "$HOME/olliecode"
-echo "Repo dihapus"
-
-echo "== 3/4 Hapus data & config =="
+echo "== 2/3 Hapus binary =="
 rm -rf "$HOME/.ollie"
-echo "Data dihapus (~/.ollie)"
+echo "Binary & data dihapus (~/.ollie)"
 
-echo "== 4/4 (lewati) Bun tidak dihapus (dipakai app lain) =="
-echo "  Kalau mau hapus Bun juga: rm -rf ~/.bun"
-
+echo "== 3/3 Selesai =="
 echo ""
 echo "SELESAI. olliEcode sudah di-uninstall."
-echo "OpenCode asli tetap utuh — tidak disentuh sama sekali."
-echo "Jalankan:  source ~/.bashrc  (untuk refresh alias)"
+echo "OpenCode asli tetap utuh — tidak tersentuh."
+echo "Jalankan:  source ~/.bashrc"
