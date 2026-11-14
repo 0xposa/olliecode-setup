@@ -2,12 +2,10 @@
 set -e
 
 # ============================================================
-# olliEcode — installer macOS
+# olliEcode — installer macOS (simple)
 # ============================================================
 
 REPO="https://github.com/0xposa/olliecode-setup"
-BIN_DIR="$HOME/.ollie/bin"
-BIN="$BIN_DIR/opencode"
 
 case "$(uname -m)" in
   arm64)  ASSET="opencode-darwin-arm64.gz" ;;
@@ -16,25 +14,21 @@ case "$(uname -m)" in
 esac
 
 echo "Download $ASSET ..."
-mkdir -p "$BIN_DIR"
-curl -fL --retry 3 -o /tmp/opencode.gz "$REPO/releases/latest/download/$ASSET"
-gzip -d -f /tmp/opencode.gz
-install -m 0755 /tmp/opencode "$BIN"
-rm -f /tmp/opencode
+TMP="$(mktemp -d)"
+curl -fL --retry 3 -o "$TMP/opencode.gz" "$REPO/releases/latest/download/$ASSET"
+gzip -dc "$TMP/opencode.gz" > "$TMP/opencode"
+chmod +x "$TMP/opencode"
 
-# macOS: hapus quarantine biar bisa jalan
-xattr -d com.apple.quarantine "$BIN" 2>/dev/null || true
-
-RC="$HOME/.zshrc"
-if ! grep -q 'alias olliecode=' "$RC" 2>/dev/null; then
-  cat >> "$RC" << 'EOF'
-
-# olliEcode
-alias olliecode='export XDG_CONFIG_HOME="$HOME/.ollie/config"; export XDG_DATA_HOME="$HOME/.ollie/data"; export XDG_CACHE_HOME="$HOME/.ollie/cache"; export XDG_STATE_HOME="$HOME/.ollie/state"; $HOME/.ollie/bin/opencode'
-EOF
+if [ -w /usr/local/bin ]; then
+  DEST="/usr/local/bin/olliecode"
+else
+  DEST="$HOME/.local/bin/olliecode"
+  mkdir -p "$HOME/.local/bin"
 fi
+mv "$TMP/opencode" "$DEST"
+rm -rf "$TMP"
+xattr -d com.apple.quarantine "$DEST" 2>/dev/null || true
 
 echo ""
-echo "SELESAI. Jalankan:"
-echo "  source $RC"
+echo "SELESAI. Langsung ketik:"
 echo "  olliecode"

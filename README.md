@@ -10,7 +10,6 @@ curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/install
 
 Lalu:
 ```bash
-source ~/.bashrc
 olliecode
 ```
 
@@ -22,7 +21,6 @@ curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/install
 
 Lalu:
 ```bash
-source ~/.zshrc
 olliecode
 ```
 
@@ -34,23 +32,27 @@ irm https://raw.githubusercontent.com/0xposa/olliecode-setup/main/install-window
 
 Tutup & buka ulang PowerShell, lalu:
 ```powershell
-opencode
+olliecode
 ```
 
-## Shortcut (Linux / macOS)
+## Shortcut
 
 | Perintah | Fungsi |
 |---|---|
 | `olliecode` | Buka olliEcode |
 
-## Uninstall (Linux / macOS)
+## Uninstall
 
+Linux / macOS:
 ```bash
-rm -rf ~/.ollie
-sed -i '/alias olliecode/d' ~/.bashrc ~/.zshrc 2>/dev/null
+rm -f /usr/local/bin/olliecode ~/.local/bin/olliecode
+```
+
+Windows (PowerShell):
+```powershell
+Remove-Item -Recurse -Force "$env:LOCALAPPDATA\olliecode"
 ```
 
 ## Catatan
 
-- Data disimpan di `~/.ollie` — OpenCode asli tidak tersentuh.
 - Repo sumber: `https://gitlab.com/123-group5802346/olliecode`

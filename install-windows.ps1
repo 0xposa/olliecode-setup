@@ -3,10 +3,10 @@
 # ============================================================
 $ErrorActionPreference = "Stop"
 
-$Repo    = "https://github.com/0xposa/olliecode-setup"
-$BinDir  = "$env:USERPROFILE\.ollie\bin"
-$Bin     = "$BinDir\opencode.exe"
-$Asset   = "opencode-windows-x64.gz"
+$Repo   = "https://github.com/0xposa/olliecode-setup"
+$BinDir = "$env:LOCALAPPDATA\olliecode\bin"
+$Bin    = "$BinDir\olliecode.exe"
+$Asset  = "opencode-windows-x64.gz"
 
 Write-Host "Download $Asset ..."
 New-Item -ItemType Directory -Force -Path $BinDir | Out-Null
@@ -27,4 +27,4 @@ if ($userPath -notlike "*$BinDir*") {
 Write-Host ""
 Write-Host "SELESAI."
 Write-Host "Tutup & buka ulang PowerShell, lalu jalankan:"
-Write-Host "  opencode"
+Write-Host "  olliecode"
