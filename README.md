@@ -2,7 +2,7 @@
 
 Install **olliEcode** (binary siap pakai) — Windows, Linux, macOS.
 
-## Linux (proot-distro / Ubuntu / Debian)
+## Instalasi (Linux / proot-distro / Android)
 
 ```bash
 proot-distro login ubuntu
@@ -13,15 +13,7 @@ olliecode
 
 Installer auto-deteksi `arm64` / `x64`.
 
-## Shortcut (Linux)
-
-| Perintah | Fungsi |
-|---|---|
-| `olliecode` | Buka CLI olliEcode |
-| `olliecode-web` | Web UI di `http://localhost:4444` |
-| `olliecode-reset` | Hapus data (`~/.ollie`) |
-
-## Download manual (Windows / macOS)
+## Instalasi (Windows / macOS)
 
 Download binary sesuai OS dari **[Releases](https://github.com/0xposa/olliecode-setup/releases/latest)**:
 
@@ -45,6 +37,14 @@ chmod +x opencode-<os>
 ```
 
 Windows: ekstrak `.gz` (pakai 7-Zip), lalu jalankan `opencode.exe`.
+
+## Shortcut (Linux)
+
+| Perintah | Fungsi |
+|---|---|
+| `olliecode` | Buka CLI olliEcode |
+| `olliecode-web` | Web UI di `http://localhost:4444` |
+| `olliecode-reset` | Hapus data (`~/.ollie`) |
 
 ## Uninstall (Linux)
 
