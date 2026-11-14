@@ -1,58 +1,56 @@
-# olliEcode Setup
+# olliEcode
 
-Install **olliEcode** (binary siap pakai) — Windows, Linux, macOS.
+Install olliEcode (AI coding agent, fork OpenCode).
 
-## Instalasi (Linux / proot-distro / Android)
+## Linux
 
 ```bash
-proot-distro login ubuntu
-curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/setup-ollie.sh | bash
+curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/install-linux.sh | bash
+```
+
+Lalu:
+```bash
 source ~/.bashrc
 olliecode
 ```
 
-Installer auto-deteksi `arm64` / `x64`.
-
-## Instalasi (Windows / macOS)
-
-Download binary sesuai OS dari **[Releases](https://github.com/0xposa/olliecode-setup/releases/latest)**:
-
-| OS | File |
-|---|---|
-| Linux ARM64 (HP Android/proot) | `opencode-linux-arm64.gz` |
-| Linux x64 | `opencode-linux-x64.gz` |
-| Linux x64 (musl/Alpine) | `opencode-linux-x64-musl.gz` |
-| macOS Apple Silicon (M1/M2/M3) | `opencode-darwin-arm64.gz` |
-| macOS Intel | `opencode-darwin-x64.gz` |
-| Windows x64 | `opencode-windows-x64.gz` |
-| Windows ARM | `opencode-windows-arm64.gz` |
-
-Cara pakai:
+## macOS
 
 ```bash
-# Linux/macOS: ekstrak, kasih izin jalan, jalankan
-gzip -d opencode-<os>.gz
-chmod +x opencode-<os>
-./opencode-<os>
+curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/install-mac.sh | bash
 ```
 
-Windows: ekstrak `.gz` (pakai 7-Zip), lalu jalankan `opencode.exe`.
+Lalu:
+```bash
+source ~/.zshrc
+olliecode
+```
 
-## Shortcut (Linux)
+## Windows (PowerShell)
+
+```powershell
+irm https://raw.githubusercontent.com/0xposa/olliecode-setup/main/install-windows.ps1 | iex
+```
+
+Tutup & buka ulang PowerShell, lalu:
+```powershell
+opencode
+```
+
+## Shortcut (Linux / macOS)
 
 | Perintah | Fungsi |
 |---|---|
-| `olliecode` | Buka CLI olliEcode |
-| `olliecode-web` | Web UI di `http://localhost:4444` |
-| `olliecode-reset` | Hapus data (`~/.ollie`) |
+| `olliecode` | Buka olliEcode |
 
-## Uninstall (Linux)
+## Uninstall (Linux / macOS)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/uninstall-ollie.sh | bash
+rm -rf ~/.ollie
+sed -i '/alias olliecode/d' ~/.bashrc ~/.zshrc 2>/dev/null
 ```
 
 ## Catatan
 
-- Data terisolasi di `~/.ollie` — OpenCode asli tidak tersentuh.
+- Data disimpan di `~/.ollie` — OpenCode asli tidak tersentuh.
 - Repo sumber: `https://gitlab.com/123-group5802346/olliecode`
