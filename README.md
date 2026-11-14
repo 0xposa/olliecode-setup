@@ -29,22 +29,24 @@ curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/setup-o
 
 ```bash
 source ~/.bashrc
-olliecode
 ```
 
 ## Shortcut (alias command)
 
 | Perintah | Fungsi |
 |---|---|
-| `olliecode` | Buka CLI olliEcode (data terisolasi ke `~/.ollie`, aman dari OpenCode asli) |
+| `olliecode` | Buka CLI olliEcode (data terisolasi ke `~/.ollie`) |
+| `olliecode-web` | Jalanin web UI di `http://localhost:4444` |
+| `olliecode-update` | `git pull` + `bun install` (update) |
+| `olliecode-reset` | Hapus data olliEcode (`~/.ollie`) |
 
-> Alias ini otomatis dibuat oleh installer di `~/.bashrc`.
+> Alias ini otomatis dibuat oleh installer di `~/.bashrc`. Data terisolasi, jadi **OpenCode asli tidak tersentuh**.
 
-## Install command satu-liner
+## One-liner install / uninstall
 
 | Perintah | Fungsi |
 |---|---|
-| `curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/setup-ollie.sh \| bash` | Install olliEcode + buat shortcut `olliecode` |
+| `curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/setup-ollie.sh \| bash` | Install + bikin semua shortcut |
 | `curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/uninstall-ollie.sh \| bash` | Hapus semua jejak olliEcode |
 
 ## Uninstall

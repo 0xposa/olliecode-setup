@@ -6,8 +6,9 @@ set -e
 # (OpenCode asli tidak tersentuh)
 # ============================================================
 
-echo "== 1/4 Hapus alias olliecode =="
-sed -i '/alias olliecode=/d' "$HOME/.bashrc" 2>/dev/null || true
+echo "== 1/4 Hapus semua alias olliEcode =="
+sed -i '/# ---- olliEcode shortcuts/,/alias olliecode-reset=/d' "$HOME/.bashrc" 2>/dev/null || true
+sed -i '/alias olliecode/d' "$HOME/.bashrc" 2>/dev/null || true
 echo "Alias dihapus dari .bashrc"
 
 echo "== 2/4 Hapus folder repo =="
