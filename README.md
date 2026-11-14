@@ -35,11 +35,20 @@ Tutup & buka ulang PowerShell, lalu:
 olliecode
 ```
 
+## Web UI (Linux)
+
+```bash
+olliecode serve
+```
+
+Lalu buka `http://localhost:4096` di browser, dan masukkan **password** yang muncul di terminal.
+
 ## Shortcut
 
 | Perintah | Fungsi |
 |---|---|
-| `olliecode` | Buka olliEcode |
+| `olliecode` | Buka olliEcode (CLI) |
+| `olliecode serve` | Web UI di `http://localhost:4096` |
 
 ## Uninstall
 
@@ -55,4 +64,5 @@ Remove-Item -Recurse -Force "$env:LOCALAPPDATA\olliecode"
 
 ## Catatan
 
+- Web UI saat ini hanya ada di binary Linux.
 - Repo sumber: `https://gitlab.com/123-group5802346/olliecode`
