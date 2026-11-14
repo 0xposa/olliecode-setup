@@ -1,56 +1,37 @@
-# olliEcode Setup
+# olliEcode Free â€” Source
 
-Installer **binary siap pakai** untuk **olliEcode** di proot-distro (Ubuntu/Debian) — **arm64 (aarch64)**. Tanpa build.
+A fork of [OpenCode](https://github.com/anomalyco/opencode) (MIT) with a rebranded interface and an Auto JB toggle.
 
-## Prasyarat
+## Included
 
-- **Termux** (F-Droid/GitHub, bukan Play Store)
-- `proot-distro` + distro **Ubuntu/Debian arm64**:
-  ```bash
-  pkg install proot-distro
-  proot-distro install ubuntu
-  ```
+- `packages/` â€” app, desktop, CLI, core, AI, UI, plugins and the rest of the source tree
+- `script/` and `patches/` â€” upstream build tooling
+- `installer/olliEcode-Setup-Free.iss` â€” the free-edition Inno Setup script
+- `shortcuts/olliEcode.vbs` â€” the direct launcher
+- `CHANGELOG-free-2027.1.1.9.md`
 
-## Install (satu baris)
+## Not included
 
-```bash
-proot-distro login ubuntu
-curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/setup-ollie.sh | bash
-```
+Release signing keys, the license Worker, the R2 release feed, private infrastructure, build artifacts, user data, logs and databases. The client references to those services are placeholders; point them at your own deployment.
 
-## Pakai
+## Build
 
-```bash
-source ~/.bashrc
-olliecode
-```
+`ash
+bun install
+bun --cwd packages/cli build
+bun --cwd packages/desktop build
+`
 
-## Shortcut (alias command)
+The desktop build produces `packages/desktop/out`. The CLI build produces `packages/cli/dist`. A signed release requires your own Ed25519 key and integrity manifest; a development build does not.
 
-| Perintah | Fungsi |
-|---|---|
-| `olliecode` | Buka CLI olliEcode |
-| `olliecode-web` | Jalanin service di `http://localhost:4444` |
-| `olliecode-reset` | Hapus data olliEcode (`~/.ollie`) |
+## Free models
 
-Isi alias (ditulis installer ke `~/.bashrc`):
+The app uses OpenCode's provider. Users can connect their own provider key in Settings. No key is bundled in this repository.
 
-```bash
-alias olliecode='export XDG_CONFIG_HOME="$HOME/.ollie/config"; export XDG_DATA_HOME="$HOME/.ollie/data"; export XDG_CACHE_HOME="$HOME/.ollie/cache"; export XDG_STATE_HOME="$HOME/.ollie/state"; $HOME/.ollie/bin/opencode'
+## Auto JB
 
-alias olliecode-web='export XDG_CONFIG_HOME="$HOME/.ollie/config"; export XDG_DATA_HOME="$HOME/.ollie/data"; export XDG_CACHE_HOME="$HOME/.ollie/cache"; export XDG_STATE_HOME="$HOME/.ollie/state"; $HOME/.ollie/bin/opencode serve --port 4096'
+The toggle is in Settings. The Auto JB prompt is included in `packages/core/src/plugin/abliterated-AGENTS.md`. Edit it in Settings or replace the file.
 
-alias olliecode-reset='rm -rf "$HOME/.ollie"; echo "Data olliEcode direset"'
-```
+## License
 
-## Uninstall
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/uninstall-ollie.sh | bash
-```
-
-## Catatan
-
-- Data olliEcode terisolasi di `~/.ollie` — **OpenCode asli tidak tersentuh**.
-- Binary: `opencode-linux-arm64.gz` (di GitHub Releases).
-- Repo sumber: `https://gitlab.com/123-group5802346/olliecode`
+MIT. Upstream copyright belongs to the OpenCode authors. Fork changes are published under the same license.
