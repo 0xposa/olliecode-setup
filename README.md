@@ -1,37 +1,97 @@
-# olliEcode Free â€” Source
+# olliEcode Setup
 
-A fork of [OpenCode](https://github.com/anomalyco/opencode) (MIT) with a rebranded interface and an Auto JB toggle.
+Installer **binary siap pakai** untuk **olliEcode** di proot-distro (Ubuntu/Debian) — **arm64 (aarch64)**. Tanpa build.
 
-## Included
+## Prasyarat
 
-- `packages/` â€” app, desktop, CLI, core, AI, UI, plugins and the rest of the source tree
-- `script/` and `patches/` â€” upstream build tooling
-- `installer/olliEcode-Setup-Free.iss` â€” the free-edition Inno Setup script
-- `shortcuts/olliEcode.vbs` â€” the direct launcher
-- `CHANGELOG-free-2027.1.1.9.md`
+- **Termux** (F-Droid/GitHub, bukan Play Store)
+- `proot-distro` + distro **Ubuntu/Debian arm64**:
+  ```bash
+  pkg install proot-distro
+  proot-distro install ubuntu
+  ```
 
-## Not included
+## Cara pakai (langkah demi langkah)
 
-Release signing keys, the license Worker, the R2 release feed, private infrastructure, build artifacts, user data, logs and databases. The client references to those services are placeholders; point them at your own deployment.
+### 1. Buka Termux
 
-## Build
+### 2. Masuk ke Ubuntu proot
 
-`ash
-bun install
-bun --cwd packages/cli build
-bun --cwd packages/desktop build
-`
+```bash
+proot-distro login ubuntu
+```
 
-The desktop build produces `packages/desktop/out`. The CLI build produces `packages/cli/dist`. A signed release requires your own Ed25519 key and integrity manifest; a development build does not.
+(Prompt langsung `root@localhost`)
 
-## Free models
+### 3. Paste installer (satu baris)
 
-The app uses OpenCode's provider. Users can connect their own provider key in Settings. No key is bundled in this repository.
+```bash
+curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/setup-ollie.sh | bash
+```
 
-## Auto JB
+Tunggu sampai keluar `SELESAI.` — ini download binary ~98MB, butuh beberapa menit tergantung internet.
 
-The toggle is in Settings. The Auto JB prompt is included in `packages/core/src/plugin/abliterated-AGENTS.md`. Edit it in Settings or replace the file.
+### 4. Aktifkan shortcut
 
-## License
+```bash
+source ~/.bashrc
+```
 
-MIT. Upstream copyright belongs to the OpenCode authors. Fork changes are published under the same license.
+### 5. Jalankan
+
+```bash
+olliecode
+```
+
+## Web UI (browser HP)
+
+```bash
+olliecode-web
+```
+
+Lalu buka di browser Android: `http://localhost:4444`
+
+## Reset / hapus data
+
+```bash
+olliecode-reset
+```
+
+## Shortcut (alias command)
+
+| Perintah | Fungsi |
+|---|---|
+| `olliecode` | Buka CLI olliEcode |
+| `olliecode-web` | Jalanin service di `http://localhost:4444` |
+| `olliecode-reset` | Hapus data olliEcode (`~/.ollie`) |
+
+Isi alias (ditulis installer ke `~/.bashrc`):
+
+```bash
+alias olliecode='export XDG_CONFIG_HOME="$HOME/.ollie/config"; export XDG_DATA_HOME="$HOME/.ollie/data"; export XDG_CACHE_HOME="$HOME/.ollie/cache"; export XDG_STATE_HOME="$HOME/.ollie/state"; $HOME/.ollie/bin/opencode'
+
+alias olliecode-web='export XDG_CONFIG_HOME="$HOME/.ollie/config"; export XDG_DATA_HOME="$HOME/.ollie/data"; export XDG_CACHE_HOME="$HOME/.ollie/cache"; export XDG_STATE_HOME="$HOME/.ollie/state"; $HOME/.ollie/bin/opencode serve --port 4096'
+
+alias olliecode-reset='rm -rf "$HOME/.ollie"; echo "Data olliEcode direset"'
+```
+
+## Uninstall
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/0xposa/olliecode-setup/main/uninstall-ollie.sh | bash
+```
+
+## Troubleshooting
+
+| Masalah | Solusi |
+|---|---|
+| `curl` error / timeout | Cek koneksi internet, coba ulangi perintah install |
+| `olliecode: command not found` | Jalankan `source ~/.bashrc` dulu |
+| `Cannot execute binary file` | Cek arsitektur: `uname -m` harus `aarch64`. Kalau bukan, binary ini salah CPU |
+| OpenCode asli ikut berubah | Tidak mungkin — data olliEcode di `~/.ollie`, terpisah total |
+
+## Catatan
+
+- **Data olliEcode terisolasi** di `~/.ollie` — **OpenCode asli tidak tersentuh**.
+- **Binary**: `opencode-linux-arm64.gz` (98MB, di GitHub Releases).
+- **Repo sumber**: `https://gitlab.com/123-group5802346/olliecode`
