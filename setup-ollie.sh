@@ -2,24 +2,32 @@
 set -e
 
 # ============================================================
-# olliEcode installer — download binary siap pakai (arm64)
-# Tanpa build. Untuk proot-distro Ubuntu/Debian arm64.
+# olliEcode installer — download binary siap pakai
+# Auto-deteksi Linux arm64 / x64. Tanpa build.
 # ============================================================
 
 REPO="https://github.com/0xposa/olliecode-setup"
 INSTALL_DIR="$HOME/.ollie/bin"
 BIN="$INSTALL_DIR/opencode"
 
-echo "== 1/4 Cek arsitektur =="
-if [ "$(uname -m)" != "aarch64" ]; then
-  echo "ERROR: binary ini untuk arm64 (aarch64). Arsitekturmu: $(uname -m)"
+echo "== 1/4 Cek platform =="
+if [ "$(uname -s)" != "Linux" ]; then
+  echo "ERROR: installer ini untuk Linux (proot-distro Ubuntu/Debian)."
+  echo "Untuk Windows/macOS, download binary manual dari Releases."
   exit 1
 fi
+
+case "$(uname -m)" in
+  aarch64|arm64) ASSET="opencode-linux-arm64.gz" ;;
+  x86_64|amd64)  ASSET="opencode-linux-x64.gz" ;;
+  *) echo "ERROR: arsitektur tidak didukung: $(uname -m)"; exit 1 ;;
+esac
+echo "Platform: $(uname -m) -> $ASSET"
 
 echo "== 2/4 Download binary =="
 mkdir -p "$INSTALL_DIR"
 curl -fL --retry 3 -o /tmp/opencode.gz \
-  "$REPO/releases/latest/download/opencode-linux-arm64.gz"
+  "$REPO/releases/latest/download/$ASSET"
 
 echo "== 3/4 Ekstrak & pasang =="
 gzip -d -f /tmp/opencode.gz
